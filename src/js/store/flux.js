@@ -3,10 +3,10 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			apiUrl: "https://assets.breatheco.de/apis/fake/contact/agenda/jose_prueba",
+			apiUrl: "https://assets.breatheco.de/apis/fake/contact/agenda/hastalasnarices",
 			apiUrlPost: "https://assets.breatheco.de/apis/fake/contact/",
 			agenda: [],
-			user: "jose_prueba"
+			user: "hastalasnarices"
 		},
 		actions: {
 			getAgenda: apiUrl => {
@@ -19,17 +19,31 @@ const getState = ({ getStore, setStore }) => {
 						throw err;
 					});
 			},
-			getContact: (apiUrl, contact) => {
-				console.log(contact);
-				fetch(apiUrl, {
+			// getContact: (apiUrl, contact) => {
+			// 	console.log("ho", contact);
+			// 	console.log("ee", apiUrl);
+			// 	fetch(apiUrl, {
+			// 		method: "POST",
+			// 		body: JSON.stringify({ contact }),
+			// 		headers: new Headers({
+			// 			"Content-Type": "application/json"
+			// 		})
+			// 	}).then(response => {
+			// 		console.log(response);
+			// 		return response.json();
+			// 	});
+			// }
+			getContact: async newContact => {
+				//console.log("contact", contact);
+				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
-					body: JSON.stringify({ contact }),
-					headers: {
+					body: JSON.stringify({ newContact }),
+					headers: new Headers({
 						"Content-Type": "application/json"
-					}
-				}).then(response => {
-					return response.json();
+					})
 				});
+				response = await response.json();
+				console.log(response);
 			}
 
 			// getAgenda: apiUrl => {
