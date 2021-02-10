@@ -17,13 +17,10 @@ export const Contact = () => {
 
 	const handleShow = () => setShow(true);
 
-	let contactList = store.agenda.map((item, index) => {
+	let contactList = store.contacts.map((item, index) => {
 		return (
 			<ContactCard
-				name={item.full_name}
-				address={item.address}
-				email={item.email}
-				phone={item.phone}
+				item={item}
 				id={item.id}
 				key={index.toString()}
 				onDelete={() => setState({ showModal: true })}

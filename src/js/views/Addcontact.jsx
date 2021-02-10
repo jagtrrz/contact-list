@@ -5,32 +5,17 @@ import { Context } from "../store/appContext";
 
 export const Addcontact = () => {
 	const { store, actions } = useContext(Context);
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [address, setAddress] = useState("");
-	const [phone, setPhone] = useState("");
-	const [contact, setContact] = useState();
+	const [contact, setContact] = useState({
+		name: "",
+		email: "",
+		address: "",
+		phone: ""
+	});
 
-	const [help, setHelp] = useState(false);
-
-	const createContact = () => {
-		setContact({
-			full_name: name,
-			email: email,
-			agenda_slug: "hastalasnarices",
-			address: address,
-			phone: phone
-		});
+	//aqui name se refiere a cada input del formulario -> name="name" name="email"...
+	const createContact = event => {
+		setContact({ ...contact, [event.target.name]: event.target.value });
 	};
-
-	//	console.log("fefe", createContact());
-
-	useEffect(
-		() => {
-			actions.getContact(contact);
-		},
-		[contact != undefined]
-	);
 
 	return (
 		<div className="container">
@@ -43,10 +28,8 @@ export const Addcontact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Full Name"
-							onChange={e => {
-								setName(e.target.value);
-							}}
-							value={name}
+							name="name"
+							onChange={createContact}
 						/>
 					</div>
 					<div className="form-group">
@@ -55,10 +38,8 @@ export const Addcontact = () => {
 							type="email"
 							className="form-control"
 							placeholder="Enter email and finish with .com please and dont repeat the email please"
-							onChange={e => {
-								setEmail(e.target.value);
-							}}
-							value={email}
+							name="email"
+							onChange={createContact}
 						/>
 					</div>
 					<div className="form-group">
@@ -67,10 +48,8 @@ export const Addcontact = () => {
 							type="phone"
 							className="form-control"
 							placeholder="Enter phone"
-							onChange={e => {
-								setPhone(e.target.value);
-							}}
-							value={phone}
+							name="phone"
+							onChange={createContact}
 						/>
 					</div>
 					<div className="form-group">
@@ -79,24 +58,20 @@ export const Addcontact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Enter address"
-							onChange={e => {
-								setAddress(e.target.value);
-							}}
-							value={address}
+							name="address"
+							onChange={createContact}
 						/>
 					</div>
-					{/* //<Link className="mt-3 w-100 text-center" to="/"> */}
-					<button
-						onClick={() => {
-							createContact();
-							// setHelp(!help);
-							console.log("he creado un contacto?", contact);
-						}}
-						type="button"
-						className="btn btn-primary form-control">
-						save
-					</button>
-					{/* </Link> */}
+					<Link className="mt-3 w-100 text-center" to="/">
+						<button
+							onClick={() => {
+								actions.addContact(contact);
+							}}
+							type="button"
+							className="btn btn-primary form-control">
+							save
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>

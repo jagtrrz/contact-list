@@ -2,48 +2,34 @@ const getState = ({ getStore, setStore }) => {
 	// const apirUrl = "https://assets.breatheco.de/apis/fake/contact/agenda/jbook";
 	return {
 		store: {
-			//Your data structures, A.K.A Entities
 			apiUrl: "https://assets.breatheco.de/apis/fake/contact/agenda/hastalasnarices",
-			apiUrlPost: "https://assets.breatheco.de/apis/fake/contact/",
-			agenda: [],
+			contacts: [],
 			user: "hastalasnarices"
 		},
 		actions: {
-			getAgenda: apiUrl => {
-				fetch(apiUrl)
-					.then(async res => {
-						const response = await res.json();
-						setStore({ agenda: [...getStore().agenda, ...response] });
-					})
-					.catch(err => {
-						throw err;
-					});
+			getContacts: apiUrl => {
+				fetch(apiUrl).then(async res => {
+					const response = await res.json();
+					setStore({ contacts: [...getStore().contacts, ...response] });
+				});
 			},
-			// getContact: (apiUrl, contact) => {
-			// 	console.log("ho", contact);
-			// 	console.log("ee", apiUrl);
-			// 	fetch(apiUrl, {
-			// 		method: "POST",
-			// 		body: JSON.stringify({ contact }),
-			// 		headers: new Headers({
-			// 			"Content-Type": "application/json"
-			// 		})
-			// 	}).then(response => {
-			// 		console.log(response);
-			// 		return response.json();
-			// 	});
-			// }
-			getContact: async newContact => {
-				//console.log("contact", contact);
+
+			addContact: async input => {
 				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
-					body: JSON.stringify({ newContact }),
+					body: JSON.stringify({
+						full_name: input.name,
+						email: input.email,
+						agenda_slug: "hastalasnarices",
+						address: input.address,
+						phone: input.phone
+					}),
 					headers: new Headers({
 						"Content-Type": "application/json"
 					})
 				});
 				response = await response.json();
-				console.log(response);
+				//getActions().getContacts();
 			}
 
 			// getAgenda: apiUrl => {

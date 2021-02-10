@@ -4,10 +4,6 @@ import PropTypes from "prop-types";
 import Photo from "../../img/perfil.jpeg";
 
 export const ContactCard = props => {
-	const [state, setState] = useState({
-		//initialize state here
-	});
-
 	return (
 		<li className="list-group-item">
 			<div className="row w-100">
@@ -23,10 +19,10 @@ export const ContactCard = props => {
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>
-					<label className="name lead">{props.name}</label>
+					<label className="name lead">{props.item.full_name}</label>
 					<br />
 					<i className="fas fa-map-marker-alt text-muted mr-3" />
-					<span className="text-muted">{props.address}</span>
+					<span className="text-muted">{props.item.address}</span>
 					<br />
 					<span
 						className="fa fa-phone fa-fw text-muted mr-3"
@@ -34,7 +30,7 @@ export const ContactCard = props => {
 						title=""
 						data-original-title="(870) 288-4149"
 					/>
-					<span className="text-muted small">{props.phone}</span>
+					<span className="text-muted small">{props.item.phone}</span>
 					<br />
 					<span
 						className="fa fa-envelope fa-fw text-muted mr-3"
@@ -42,30 +38,18 @@ export const ContactCard = props => {
 						data-original-title=""
 						title=""
 					/>
-					<span className="text-muted small text-truncate">{props.email}</span>
+					<span className="text-muted small text-truncate">{props.item.email}</span>
 				</div>
 			</div>
 		</li>
 	);
 };
 
-/**
- * Define the data-types for
- * your component's properties
- **/
 ContactCard.propTypes = {
-	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	name: PropTypes.string,
-	address: PropTypes.string,
-	email: PropTypes.string,
-	phone: PropTypes.string
+	item: PropTypes.object
 };
 
-/**
- * Define the default values for
- * your component's properties
- **/
 ContactCard.defaultProps = {
 	onDelete: null
 };
