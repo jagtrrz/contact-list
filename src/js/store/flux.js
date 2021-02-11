@@ -15,6 +15,7 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			addContact: async input => {
+				setStore({ contacts: [...getStore().contacts, input] });
 				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
 					body: JSON.stringify({
@@ -29,7 +30,6 @@ const getState = ({ getStore, setStore }) => {
 					})
 				});
 				response = await response.json();
-				//getActions().getContacts();
 			}
 
 			// getAgenda: apiUrl => {

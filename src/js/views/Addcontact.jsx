@@ -12,7 +12,6 @@ export const Addcontact = () => {
 		phone: ""
 	});
 
-	//aqui name se refiere a cada input del formulario -> name="name" name="email"...
 	const createContact = event => {
 		setContact({ ...contact, [event.target.name]: event.target.value });
 	};
