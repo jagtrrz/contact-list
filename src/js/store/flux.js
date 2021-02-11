@@ -30,7 +30,7 @@ const getState = ({ getStore, setStore }) => {
 					})
 				});
 				response = await response.json();
-			}
+			},
 
 			// getAgenda: apiUrl => {
 			// 	fetch(apiUrl, {
@@ -43,16 +43,16 @@ const getState = ({ getStore, setStore }) => {
 			// 		return response.json();
 			// 	});
 			// },
-			// getDeleteAgenda: apiUrl => {
-			// 	fetch(apiUrl, {
-			// 		method: "DELETE"
-			// 	}).then(() => {
-			// 		console.log("removed");
-			// 	});
-			// },
-			// getUser: inputUser => {
-			// 	setStore({ user: inputUser });
-			// }
+
+			deleteContact: userId => {
+				console.log("hehehe", userId);
+				//setStore({ contacts: [...getStore().contacts, userId] });
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + userId, {
+					method: "DELETE"
+				}).then(() => {
+					console.log("removed");
+				});
+			}
 		}
 	};
 };

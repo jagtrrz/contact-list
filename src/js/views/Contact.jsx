@@ -17,15 +17,20 @@ export const Contact = () => {
 
 	const handleShow = () => setShow(true);
 
+	const selectId = id => {
+		return id;
+	};
+
 	let contactList = store.contacts.map((item, index) => {
 		return (
 			<ContactCard
 				item={item}
 				id={item.id}
 				key={index.toString()}
-				onDelete={() => setState({ showModal: true })}
-				taskDone={() => {
-					//taskDone(index);
+				onDelete={() => {
+					item.id;
+					console.log(selectId(item.id));
+					setState({ showModal: true });
 				}}
 			/>
 		);
@@ -45,7 +50,7 @@ export const Contact = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal show={state.showModal} onClosed={() => setState({ showModal: false })} />
 		</div>
 	);
 };

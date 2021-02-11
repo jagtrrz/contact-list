@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Photo from "../../img/perfil.jpeg";
 
 export const ContactCard = props => {
+	console.log("props.id en Contactcard", props.id);
+
 	return (
 		<li className="list-group-item">
 			<div className="row w-100">
@@ -47,7 +49,10 @@ export const ContactCard = props => {
 
 ContactCard.propTypes = {
 	onDelete: PropTypes.func,
-	item: PropTypes.object
+	item: PropTypes.object,
+	id: PropTypes.string,
+	taskDone: PropTypes.func,
+	selectId: PropTypes.string
 };
 
 ContactCard.defaultProps = {
