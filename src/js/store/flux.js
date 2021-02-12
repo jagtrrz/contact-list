@@ -46,7 +46,7 @@ const getState = ({ getStore, setStore }) => {
 
 			deleteContact: userId => {
 				console.log("hehehe", userId);
-				//setStore({ contacts: [...getStore().contacts, userId] });
+				setStore({ contacts: [...getStore().contacts, userId] });
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + userId, {
 					method: "DELETE"
 				}).then(() => {

@@ -7,8 +7,6 @@ import { Context } from "../store/appContext";
 export const Modal = props => {
 	const { store, actions } = useContext(Context);
 
-	console.log("props.id en Modal", props.id);
-
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">

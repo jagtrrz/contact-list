@@ -14,6 +14,7 @@ export const Contact = () => {
 		showModal: false
 	});
 	const [show, setShow] = useState(false);
+	const [contactID, setContactId] = useState("");
 
 	const handleShow = () => setShow(true);
 
@@ -28,8 +29,7 @@ export const Contact = () => {
 				id={item.id}
 				key={index.toString()}
 				onDelete={() => {
-					item.id;
-					console.log(selectId(item.id));
+					setContactId(item.id);
 					setState({ showModal: true });
 				}}
 			/>
@@ -50,7 +50,7 @@ export const Contact = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClosed={() => setState({ showModal: false })} />
+			<Modal id={contactID} show={state.showModal} onClosed={() => setState({ showModal: false })} />
 		</div>
 	);
 };
