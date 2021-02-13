@@ -39,7 +39,7 @@ export const Modal = props => {
 							data-dismiss="modal"
 							onClick={() => {
 								props.onClosed();
-								actions.deleteContact(props.id);
+								actions.deleteContact(props.user);
 							}}>
 							Do it!
 						</button>
@@ -54,7 +54,7 @@ Modal.propTypes = {
 	history: PropTypes.object,
 	onClosed: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.string
+	user: PropTypes.object
 };
 
 Modal.defaultProps = {

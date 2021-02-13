@@ -14,13 +14,11 @@ export const Contact = () => {
 		showModal: false
 	});
 	const [show, setShow] = useState(false);
-	const [contactID, setContactId] = useState("");
+	const [contact, setContact] = useState();
+
+	console.log("hola", store.currentContact);
 
 	const handleShow = () => setShow(true);
-
-	const selectId = id => {
-		return id;
-	};
 
 	let contactList = store.contacts.map((item, index) => {
 		return (
@@ -28,8 +26,12 @@ export const Contact = () => {
 				item={item}
 				id={item.id}
 				key={index.toString()}
+				edit={() => {
+					store.currentContact = item;
+					console.log("adios", store.currentContact);
+				}}
 				onDelete={() => {
-					setContactId(item.id);
+					setContact(item);
 					setState({ showModal: true });
 				}}
 			/>
@@ -50,7 +52,7 @@ export const Contact = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal id={contactID} show={state.showModal} onClosed={() => setState({ showModal: false })} />
+			<Modal user={contact} show={state.showModal} onClosed={() => setState({ showModal: false })} />
 		</div>
 	);
 };

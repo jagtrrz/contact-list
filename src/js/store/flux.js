@@ -4,7 +4,7 @@ const getState = ({ getStore, setStore }) => {
 		store: {
 			apiUrl: "https://assets.breatheco.de/apis/fake/contact/agenda/hastalasnarices",
 			contacts: [],
-			user: "hastalasnarices"
+			currentContact: {}
 		},
 		actions: {
 			getContacts: apiUrl => {
@@ -32,26 +32,29 @@ const getState = ({ getStore, setStore }) => {
 				response = await response.json();
 			},
 
-			// getAgenda: apiUrl => {
-			// 	fetch(apiUrl, {
-			// 		method: "PUT",
-			// 		body: JSON.stringify(agenda),
-			// 		headers: {
-			// 			"Content-Type": "application/json"
-			// 		}
-			// 	}).then(response => {
-			// 		return response.json();
-			// 	});
-			// },
-
-			deleteContact: userId => {
-				console.log("hehehe", userId);
-				setStore({ contacts: [...getStore().contacts, userId] });
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + userId, {
-					method: "DELETE"
-				}).then(() => {
-					console.log("removed");
+			edditContact: async contact => {
+				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/" + contact.id, {
+					method: "PUT",
+					body: JSON.stringify({
+						full_name: contact.name,
+						email: contact.email,
+						agenda_slug: "hastalasnarices",
+						address: contact.address,
+						phone: contact.phone
+					}),
+					headers: {
+						"Content-Type": "application/json"
+					}
 				});
+				response = await response.json();
+			},
+
+			deleteContact: async contact => {
+				setStore({ contacts: getStore().contacts.filter(index => index !== contact) });
+				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/" + contact.id, {
+					method: "DELETE"
+				});
+				response = await response.json();
 			}
 		}
 	};
