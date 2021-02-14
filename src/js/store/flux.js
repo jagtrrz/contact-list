@@ -1,10 +1,9 @@
-const getState = ({ getStore, setStore }) => {
-	// const apirUrl = "https://assets.breatheco.de/apis/fake/contact/agenda/jbook";
+const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			apiUrl: "https://assets.breatheco.de/apis/fake/contact/agenda/hastalasnarices",
 			contacts: [],
-			currentContact: {}
+			currentContact: ""
 		},
 		actions: {
 			getContacts: apiUrl => {
@@ -32,21 +31,22 @@ const getState = ({ getStore, setStore }) => {
 				response = await response.json();
 			},
 
-			edditContact: async contact => {
+			edditContact: async (input, contact) => {
 				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/" + contact.id, {
 					method: "PUT",
 					body: JSON.stringify({
-						full_name: contact.name,
-						email: contact.email,
+						full_name: input.name,
+						email: input.email,
 						agenda_slug: "hastalasnarices",
-						address: contact.address,
-						phone: contact.phone
+						address: input.address,
+						phone: input.phone
 					}),
 					headers: {
 						"Content-Type": "application/json"
 					}
 				});
 				response = await response.json();
+				setStore({ contacts: [...getStore().contacts, input] });
 			},
 
 			deleteContact: async contact => {

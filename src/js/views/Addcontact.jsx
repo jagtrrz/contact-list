@@ -16,6 +16,8 @@ export const Addcontact = () => {
 		setContact({ ...contact, [event.target.name]: event.target.value });
 	};
 
+	console.log(store.currentContact);
+
 	return (
 		<div className="container">
 			<div>
@@ -29,8 +31,7 @@ export const Addcontact = () => {
 							placeholder="Full Name"
 							name="name"
 							onChange={createContact}
-							default
-							//value={store.currentContact.full_name}
+							defaultValue={store.currentContact ? store.currentContact.full_name : ""}
 						/>
 					</div>
 					<div className="form-group">
@@ -41,7 +42,7 @@ export const Addcontact = () => {
 							placeholder="Enter email and finish with .com please and dont repeat the email please"
 							name="email"
 							onChange={createContact}
-							//value={store.currentContact.email}
+							defaultValue={store.currentContact ? store.currentContact.email : ""}
 						/>
 					</div>
 					<div className="form-group">
@@ -52,7 +53,7 @@ export const Addcontact = () => {
 							placeholder="Enter phone"
 							name="phone"
 							onChange={createContact}
-							//value={store.currentContact.phone}
+							defaultValue={store.currentContact ? store.currentContact.phone : ""}
 						/>
 					</div>
 					<div className="form-group">
@@ -63,14 +64,15 @@ export const Addcontact = () => {
 							placeholder="Enter address"
 							name="address"
 							onChange={createContact}
-							//value={store.currentContact.address}
+							defaultValue={store.currentContact ? store.currentContact.address : ""}
 						/>
 					</div>
 					<Link className="mt-3 w-100 text-center" to="/">
 						<button
 							onClick={() => {
-								actions.addContact(contact);
-								actions.edditContact(store.currentContact);
+								store.currentContact
+									? actions.edditContact(contact, store.currentContact)
+									: actions.addContact(contact);
 							}}
 							type="button"
 							className="btn btn-primary form-control">

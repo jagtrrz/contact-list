@@ -16,8 +16,6 @@ export const Contact = () => {
 	const [show, setShow] = useState(false);
 	const [contact, setContact] = useState();
 
-	console.log("hola", store.currentContact);
-
 	const handleShow = () => setShow(true);
 
 	let contactList = store.contacts.map((item, index) => {
@@ -28,7 +26,6 @@ export const Contact = () => {
 				key={index.toString()}
 				edit={() => {
 					store.currentContact = item;
-					console.log("adios", store.currentContact);
 				}}
 				onDelete={() => {
 					setContact(item);
