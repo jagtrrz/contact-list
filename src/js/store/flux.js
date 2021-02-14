@@ -46,7 +46,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				response = await response.json();
-				setStore({ contacts: [...getStore().contacts, input] });
+				// setStore({ contacts: [...getStore().contacts, input] }); **
+				// EDITAR NO ME ACTULIZA LA LISTA SI NO RECARGO LA PAGINA.
 			},
 
 			deleteContact: async contact => {
